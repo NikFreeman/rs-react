@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        Fatface: ['Abril Fatface'],
-        Lato: ['Lato'],
+        fatface: ['Abril Fatface'],
+        lato: ['Lato'],
       },
     },
   },
