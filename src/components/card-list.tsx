@@ -8,14 +8,11 @@ interface ProductState {
 }
 
 export default class CardList extends React.Component<unknown, ProductState> {
-  constructor() {
-    super();
-    this.state = { products: data };
-  }
+  state = { products: data };
 
   render(): React.ReactNode {
     const cards = this.state.products.map((item) => {
-      return <Card products={item} key={item.id} />;
+      return <Card products={item} />;
     });
     return <div className="max-w-5xl mx-auto flex flex-wrap flex-row">{cards}</div>;
   }

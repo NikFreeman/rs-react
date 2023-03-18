@@ -8,12 +8,8 @@ export default function Home() {
       <div className="bg-sky-300">
         <Header title="Main Page" />
       </div>
-      <div>
-        <SearchBar />{' '}
-      </div>
-      <div>
-        <CardList />
-      </div>
+      <SearchBar />
+      <CardList />
     </div>
   );
 }
