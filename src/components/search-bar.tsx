@@ -1,7 +1,6 @@
 import React from 'react';
 
 class SearchBar extends React.Component {
-    
   render() {
     return (
       <div className="max-w-5xl mx-auto my-5 ">
