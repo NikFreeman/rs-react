@@ -1,8 +1,8 @@
 import React from 'react';
-import { ProductProps } from '../models/products';
+import { Product } from '../models/products';
 
 interface CardProps {
-  products: ProductProps;
+  products: Product;
   key: number;
 }
 
@@ -17,51 +17,51 @@ export default class Card extends React.Component<CardProps> {
         key={this.props.key}
       >
         <div className="font-fatface text-center font-bold text-orange-600 ">
-          {this.props.products.product.title}
+          {this.props.products.title}
         </div>
-        <img className="rounded-lg" src={this.props.products.product.thumbnail} />
+        <img className="rounded-lg" src={this.props.products.thumbnail} />
         <div className="bg-slate-300 my-3 px-2 rounded-lg">
           <div className=" text-base ">
             {' '}
             <span className="font-fatface text-sm text-orange-700">category:</span>{' '}
-            {this.props.products.product.category}
+            {this.props.products.category}
           </div>
           <hr />
           <div className=" text-base ">
             {' '}
             <span className="font-fatface text-sm text-orange-700">brand:</span>
-            {this.props.products.product.brand}
+            {this.props.products.brand}
           </div>
           <hr />
           <div className="flex gap-5">
             <div className=" text-base font-bold">
               {' '}
               <span className="font-fatface text-sm font-normal text-orange-700">Price:</span>{' '}
-              {this.props.products.product.price}
+              {this.props.products.price}
             </div>
             <div className=" text-base font-bold">
               {' '}
               <span className="font-fatface text-sm font-normal text-orange-700">Stock:</span>{' '}
-              {this.props.products.product.stock}
+              {this.props.products.stock}
             </div>
           </div>
           <hr />
           <div className=" text-base ">
             {' '}
             <span className="font-fatface text-sm text-orange-700">Rating:</span>{' '}
-            {this.props.products.product.rating}
+            {this.props.products.rating}
           </div>
           <hr />
           <div className=" text-base ">
             {' '}
             <span className="font-fatface text-sm text-orange-700">Discount:</span>{' '}
-            {this.props.products.product.discountPercentage}%
+            {this.props.products.discountPercentage}%
           </div>
           <hr />
           <div className=" text-xs ">
             {' '}
             <span className="font-fatface text-sm text-orange-700">description:</span>{' '}
-            {this.props.products.product.description}
+            {this.props.products.description}
           </div>
           <hr />
         </div>
