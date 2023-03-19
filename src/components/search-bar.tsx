@@ -3,10 +3,11 @@ import { Component } from 'react';
 interface ValueState {
   value: string;
 }
-class SearchBar extends Component<never, ValueState> {
-  constructor(props: never) {
+class SearchBar extends Component<unknown, ValueState> {
+  constructor(props: unknown) {
     super(props);
-    this.state = { value: '' };
+    const item = localStorage.getItem('value');
+    item ? (this.state = { value: item }) : (this.state = { value: '' });
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -29,21 +30,23 @@ class SearchBar extends Component<never, ValueState> {
 
   render() {
     return (
-      <form className="max-w-5xl mx-auto my-5 px-3" onSubmit={this.handleSubmit}>
-        <label>
+      <div className="max-w-5xl mx-auto flex justify-center">
+        <form className="my-5 " onSubmit={this.handleSubmit}>
+          <label>
+            <input
+              className="border-2 mx-5 w-72 px-2 outline-none"
+              type="text"
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+          </label>
           <input
-            className="border mx-5 outline-none"
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
+            type="submit"
+            value="Search"
+            className="rounded w-36  font-normal text-orange-700 border-2 hover:bg-blue-400 hover:text-slate-100"
           />
-        </label>
-        <input
-          type="submit"
-          value="Search"
-          className="rounded border hover:bg-slate-700 hover:text-slate-100"
-        />
-      </form>
+        </form>
+      </div>
     );
   }
 }

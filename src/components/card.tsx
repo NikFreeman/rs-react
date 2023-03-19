@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Product } from '../models/products';
 
 interface CardProps {
-  products: Product;
+  product: Product;
 }
 
 export default class Card extends Component<CardProps> {
   constructor(props: CardProps) {
     super(props);
   }
-  render(): React.ReactNode {
+  render() {
     const {
       title,
       thumbnail,
@@ -20,7 +20,7 @@ export default class Card extends Component<CardProps> {
       rating,
       discountPercentage,
       description,
-    } = this.props.products;
+    } = this.props.product;
     return (
       <div className="w-60 border rounded-lg m-5 p-3 bg-gradient-to-b from-cyan-100 to-blue-400 flex-auto">
         <div className="font-fatface text-center font-bold text-orange-600 ">{title}</div>

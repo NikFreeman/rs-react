@@ -11,6 +11,3 @@ export interface Product {
   thumbnail: string;
   images: string[];
 }
-export interface ProductProps {
-  product: Omit<Product, 'images'>;
-}

@@ -10,9 +10,9 @@ interface ProductState {
 export default class CardList extends React.Component<unknown, ProductState> {
   state = { products: data };
 
-  render(): React.ReactNode {
+  render() {
     const cards = this.state.products.map((item) => {
-      return <Card products={item} key={item.id} />;
+      return <Card product={item} key={item.id} />;
     });
     return <div className="max-w-5xl mx-auto flex flex-wrap flex-row">{cards}</div>;
   }
