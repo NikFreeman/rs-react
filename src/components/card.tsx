@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Product } from '../models/products';
 
 interface CardProps {
   products: Product;
 }
 
-export default class Card extends React.Component<CardProps> {
+export default class Card extends Component<CardProps> {
   constructor(props: CardProps) {
     super(props);
   }
@@ -27,11 +27,11 @@ export default class Card extends React.Component<CardProps> {
         <img className="rounded-lg" src={thumbnail} />
         <div className="bg-slate-300 my-3 px-2 rounded-lg">
           <div className=" text-base ">
-            <span className="font-fatface text-sm text-orange-700">category:</span> {category}
+            <span className="font-fatface text-sm text-orange-700">Category:</span> {category}
           </div>
           <hr />
           <div className=" text-base ">
-            <span className="font-fatface text-sm text-orange-700">brand:</span>
+            <span className="font-fatface text-sm text-orange-700">Brand:</span>
             {brand}
           </div>
           <hr />
@@ -56,7 +56,7 @@ export default class Card extends React.Component<CardProps> {
           </div>
           <hr />
           <div className=" text-xs ">
-            <span className="font-fatface text-sm text-orange-700">description:</span> {description}
+            <span className="font-fatface text-sm text-orange-700">Description:</span> {description}
           </div>
           <hr />
         </div>

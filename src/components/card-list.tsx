@@ -12,7 +12,7 @@ export default class CardList extends React.Component<unknown, ProductState> {
 
   render(): React.ReactNode {
     const cards = this.state.products.map((item) => {
-      return <Card products={item} />;
+      return <Card products={item} key={item.id} />;
     });
     return <div className="max-w-5xl mx-auto flex flex-wrap flex-row">{cards}</div>;
   }

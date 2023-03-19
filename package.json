@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .ts --ext .tsx",
     "lint:fix": "eslint ./src --ext .ts --ext .tsx --fix",
     "test": "jest",
+    "coverage": "jest --watchAll --coverage --collectCoverageFrom=src/**/*.{ts,tsx}",
     "prepare": "husky install"
   },
   "dependencies": {
