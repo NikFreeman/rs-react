@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Product } from '../models/products';
 
 interface CardProps {
@@ -22,7 +22,10 @@ export default class Card extends Component<CardProps> {
       description,
     } = this.props.product;
     return (
-      <div className="w-60 border rounded-lg m-5 p-3 bg-gradient-to-b from-cyan-100 to-blue-400 flex-auto">
+      <div
+        role="listitem"
+        className="w-60 border rounded-lg m-5 p-3 bg-gradient-to-b from-cyan-100 to-blue-400 flex-auto"
+      >
         <div className="font-fatface text-center font-bold text-orange-600 ">{title}</div>
         <img className="rounded-lg" src={thumbnail} />
         <div className="bg-slate-300 my-3 px-2 rounded-lg">
