@@ -27,7 +27,7 @@ export default class Card extends Component<CardProps> {
         className="w-60 border rounded-lg m-5 p-3 bg-gradient-to-b from-cyan-100 to-blue-400 flex-auto"
       >
         <div className="font-fatface text-center font-bold text-orange-600 ">{title}</div>
-        <img className="rounded-lg" src={thumbnail} />
+        <img className="object-contain max-h-48 mx-auto rounded-lg" src={thumbnail} />
         <div className="bg-slate-300 my-3 px-2 rounded-lg">
           <div className=" text-base ">
             <span className="font-fatface text-sm text-orange-700">Category:</span> {category}
