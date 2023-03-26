@@ -14,11 +14,22 @@ class FormLayout extends Component<unknown, FormLayoutState> {
 
   constructor(props: unknown) {
     super(props);
-    this.state = { data: [] };
+    this.state = {
+      data: [],
+      firstNameValid: false,
+      lastNameValid: false,
+      birthdayValid: false,
+      birthplaceValid: false,
+      sexValid: false,
+      personalDataValid: false,
+      avatarValid: false,
+      formValid: false,
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    alert('Form submitted');
     event.preventDefault();
     const firstName = this.firstNameRef.current;
     const lastName = this.lastNameRef.current;
@@ -40,9 +51,17 @@ class FormLayout extends Component<unknown, FormLayoutState> {
       this.setState({
         data: [...this.state.data, formData],
       });
+      this.resetForm();
     }
   }
 
+  resetForm() {
+    if (this.firstNameRef.current) this.firstNameRef.current.value = '';
+    if (this.lastNameRef.current) this.lastNameRef.current.value = '';
+    if (this.birthdayRef.current) this.birthdayRef.current.value = '';
+    if (this.avatarRef.current) this.avatarRef.current.value = '';
+  }
+  validateField() {}
   render() {
     const countries = ['Belarus', 'Ukraine', 'Poland', 'Other'];
     return (
@@ -123,7 +142,25 @@ class FormLayout extends Component<unknown, FormLayoutState> {
             <label className="text-sm" htmlFor="country">
               Country:
             </label>
-            <select name="country" id="" ref={this.birthplaceRef}>
+            <select
+              className='
+              block
+                rounded-md
+                px-6                
+                pb-1
+                w-1/6
+                text-md              
+              text-white
+              bg-neutral-700
+                appearance-none
+                focus:outline-none
+                focus:ring-0
+                peer
+                invalid:border-b-1"'
+              name="country"
+              id=""
+              ref={this.birthplaceRef}
+            >
               {countries.map((item, index) => (
                 <option key={index} value={item}>
                   {item}
