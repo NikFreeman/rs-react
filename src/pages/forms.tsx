@@ -1,9 +1,5 @@
-import { Component, ReactNode } from 'react';
-
-class SomeForm extends Component {
-  render(): ReactNode {
-    return <div>Form</div>;
-  }
+import FormLayout from '../components/form-layout';
+function Form() {
+  return <FormLayout />;
 }
-
-export default SomeForm;
+export default Form;
