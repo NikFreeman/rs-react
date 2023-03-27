@@ -9,12 +9,11 @@ export interface InformForm {
 }
 export interface FormLayoutState {
   data: InformForm[];
-  firstNameValid: boolean;
-  lastNameValid: boolean;
-  birthdayValid: boolean;
-  birthplaceValid: boolean;
-  sexValid: boolean;
-  personalDataValid: boolean;
-  avatarValid: boolean;
+  isErrorFirstName: boolean;
+  isErrorLastName: boolean;
+  isErrorBirthday: boolean;
+  isErrorSex: boolean;
+  isErrorPersonalData: boolean;
+  isErrorAvatar: boolean;
   formValid: boolean;
 }

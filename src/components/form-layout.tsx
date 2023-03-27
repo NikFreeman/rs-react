@@ -16,42 +16,45 @@ class FormLayout extends Component<unknown, FormLayoutState> {
     super(props);
     this.state = {
       data: [],
-      firstNameValid: false,
-      lastNameValid: false,
-      birthdayValid: false,
-      birthplaceValid: false,
-      sexValid: false,
-      personalDataValid: false,
-      avatarValid: false,
+      isErrorFirstName: true,
+      isErrorLastName: true,
+      isErrorBirthday: true,
+      isErrorSex: true,
+      isErrorPersonalData: true,
+      isErrorAvatar: true,
       formValid: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    alert('Form submitted');
     event.preventDefault();
-    const firstName = this.firstNameRef.current;
-    const lastName = this.lastNameRef.current;
-    const birthday = this.birthdayRef.current;
-    const birthplace = this.birthplaceRef.current;
-    const sexMale = this.sexMaleRef.current;
-    const personalData = this.personalDataRef.current;
-    const avatarFile = this.avatarRef.current;
-    if (avatarFile?.files) {
-      const formData: InformForm = {
-        firstName: firstName ? firstName.value : '',
-        lastName: lastName ? lastName.value : '',
-        birthday: birthday ? birthday.value : '',
-        birthplace: birthplace ? birthplace.value : '',
-        personalData: personalData ? personalData.checked : false,
-        sex: sexMale ? (sexMale.checked ? 'male' : 'female') : '',
-        avatar: avatarFile ? avatarFile.files[0].name : '',
-      };
-      this.setState({
-        data: [...this.state.data, formData],
-      });
-      this.resetForm();
+    this.validateField();
+    this.validateForm();
+    if (this.state.formValid) {
+      alert('Form submitted');
+      const firstName = this.firstNameRef.current;
+      const lastName = this.lastNameRef.current;
+      const birthday = this.birthdayRef.current;
+      const birthplace = this.birthplaceRef.current;
+      const sexMale = this.sexMaleRef.current;
+      const personalData = this.personalDataRef.current;
+      const avatarFile = this.avatarRef.current;
+      if (avatarFile?.files) {
+        const formData: InformForm = {
+          firstName: firstName ? firstName.value : '',
+          lastName: lastName ? lastName.value : '',
+          birthday: birthday ? birthday.value : '',
+          birthplace: birthplace ? birthplace.value : '',
+          personalData: personalData ? personalData.checked : false,
+          sex: sexMale ? (sexMale.checked ? 'male' : 'female') : '',
+          avatar: avatarFile ? avatarFile.files[0].name : '',
+        };
+        this.setState({
+          data: [...this.state.data, formData],
+        });
+        this.resetForm();
+      }
     }
   }
 
@@ -60,8 +63,57 @@ class FormLayout extends Component<unknown, FormLayoutState> {
     if (this.lastNameRef.current) this.lastNameRef.current.value = '';
     if (this.birthdayRef.current) this.birthdayRef.current.value = '';
     if (this.avatarRef.current) this.avatarRef.current.value = '';
+    if (this.sexMaleRef.current) this.sexMaleRef.current.checked = false;
+    if (this.sexFemaleRef.current) this.sexFemaleRef.current.checked = false;
+    if (this.personalDataRef.current) this.personalDataRef.current.checked = false;
+    this.setState({ formValid: false });
   }
-  validateField() {}
+
+  validateField() {
+    const firstName = this.firstNameRef.current;
+    const regExpFirstName = new RegExp('(^[A-ZА-ЯЁ][a-zа-яё]{3,})');
+    if (firstName) {
+      this.setState({ isErrorFirstName: regExpFirstName.test(firstName.value) });
+    }
+
+    const lastName = this.lastNameRef.current;
+    const regExpLastName = new RegExp('(^[A-ZА-ЯЁ][a-zа-яё]{3,})');
+    if (lastName) {
+      this.setState({ isErrorLastName: regExpLastName.test(lastName.value) });
+    }
+
+    const birthday = this.birthdayRef.current;
+    if (birthday) {
+      this.setState({ isErrorBirthday: birthday.value !== '' });
+    }
+
+    const sexMale = this.sexMaleRef.current;
+    const sexFemale = this.sexFemaleRef.current;
+    if (sexMale && sexFemale) {
+      this.setState({ isErrorSex: sexMale.checked || sexFemale.checked });
+    }
+
+    const personalData = this.personalDataRef.current;
+    if (personalData) {
+      this.setState({ isErrorPersonalData: personalData.checked });
+    }
+    const avatarFile = this.avatarRef.current;
+    if (avatarFile) {
+      this.setState({ isErrorAvatar: avatarFile.value !== '' });
+    }
+  }
+
+  validateForm() {
+    const isValidateForm =
+      this.state.isErrorFirstName &&
+      this.state.isErrorLastName &&
+      this.state.isErrorBirthday &&
+      this.state.isErrorPersonalData &&
+      this.state.isErrorSex &&
+      this.state.isErrorAvatar;
+    this.setState({ formValid: isValidateForm });
+  }
+
   render() {
     const countries = ['Belarus', 'Ukraine', 'Poland', 'Other'];
     return (
@@ -90,6 +142,7 @@ class FormLayout extends Component<unknown, FormLayoutState> {
                   required
                   ref={this.firstNameRef}
                 />
+                {!this.state.isErrorFirstName && <span className="text-red-500">Error</span>}
               </label>
               <label htmlFor="last-name">
                 Last name:
@@ -113,6 +166,7 @@ class FormLayout extends Component<unknown, FormLayoutState> {
                   required
                   ref={this.lastNameRef}
                 />
+                {!this.state.isErrorLastName && <span className="text-red-500">Error</span>}
               </label>
             </fieldset>
             <hr />
@@ -137,6 +191,7 @@ class FormLayout extends Component<unknown, FormLayoutState> {
                 type="date"
                 ref={this.birthdayRef}
               />
+              {!this.state.isErrorBirthday && <span className="text-red-500">Error</span>}
             </label>
             <hr />
             <label className="text-sm" htmlFor="country">
@@ -167,8 +222,18 @@ class FormLayout extends Component<unknown, FormLayoutState> {
                 </option>
               ))}
             </select>
-            <label htmlFor="checkPerson">I consent to my personal data</label>
-            <input type="checkbox" name="checkPerson" id="" ref={this.personalDataRef} />
+            <hr />
+            <label htmlFor="checkPerson">
+              I consent to my personal data
+              <input
+                className="mx-3"
+                type="checkbox"
+                name="checkPerson"
+                id=""
+                ref={this.personalDataRef}
+              />
+              {!this.state.isErrorPersonalData && <span className="text-red-500">Error</span>}
+            </label>
             <fieldset className="border flex flex-col w-1/2">
               <legend>Sex:</legend>
               <label>
@@ -193,9 +258,10 @@ class FormLayout extends Component<unknown, FormLayoutState> {
                   ref={this.sexFemaleRef}
                 />
               </label>
+              {!this.state.isErrorSex && <span className="text-red-500">Error</span>}
             </fieldset>
-            <input type="file" name="" id="" ref={this.avatarRef} />
-
+            <input type="file" name="avatar" ref={this.avatarRef} accept="image/png, image/jpeg" />
+            {!this.state.isErrorAvatar && <span className="text-red-500">Error</span>}
             <button
               className="border mx-auto px-2 w-20 hover:bg-slate-700 hover:text-slate-100 rounded-lg "
               type="submit"
