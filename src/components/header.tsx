@@ -17,8 +17,8 @@ class Header extends Component<LocationProps> {
     return (
       <div>
         <div className="bg-sky-300">
-          <div className="max-w-5xl mx-auto ">
-            <div className="flex p-2 justify-between items-center">
+          <div className="mx-auto max-w-5xl ">
+            <div className="flex items-center justify-between p-2">
               <h1 className="text-2xl font-bold text-green-600">
                 Current page: {pageTitle.get(this.props.location.pathname)}
               </h1>

@@ -15,7 +15,7 @@ export default class CardList extends Component<unknown, ProductState> {
       return <Card product={item} key={item.id} />;
     });
     return (
-      <div role="list" className="max-w-5xl mx-auto flex flex-wrap flex-row">
+      <div role="list" className="mx-auto flex max-w-5xl flex-row flex-wrap">
         {cards}
       </div>
     );

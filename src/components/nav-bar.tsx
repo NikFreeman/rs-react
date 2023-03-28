@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 export default function NavBar() {
   return (
     <div>
-      <ol className="flex mx-2 px-4 gap-2">
+      <ol className="mx-2 flex gap-2 px-4">
         <li>
           <NavLink to="/">Home</NavLink>
         </li>

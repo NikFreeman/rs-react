@@ -30,11 +30,11 @@ class SearchBar extends Component<unknown, ValueState> {
 
   render() {
     return (
-      <div className="max-w-5xl mx-auto flex justify-center">
+      <div className="mx-auto flex max-w-5xl justify-center">
         <form className="my-5 " onSubmit={this.handleSubmit}>
           <label>
             <input
-              className="border-2 mx-5 w-72 px-2 outline-none"
+              className="mx-5 w-72 border-2 px-2 outline-none"
               type="text"
               value={this.state.value}
               onChange={this.handleChange}
@@ -43,7 +43,7 @@ class SearchBar extends Component<unknown, ValueState> {
           <input
             type="submit"
             value="Search"
-            className="rounded w-36  font-normal text-orange-700 border-2 hover:bg-blue-400 hover:text-slate-100"
+            className="w-36 rounded  border-2 font-normal text-orange-700 hover:bg-blue-400 hover:text-slate-100"
           />
         </form>
       </div>
