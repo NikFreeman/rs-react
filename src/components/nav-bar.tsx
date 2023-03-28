@@ -1,14 +1,17 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function NavBar() {
   return (
     <div>
-      <ol className="flex mx-2 px-4">
-        <li className="px-4">
-          <Link to="/">Home</Link>
+      <ol className="mx-2 flex gap-2 px-4">
+        <li>
+          <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <Link to="/about">About</Link>
+          <NavLink to="/form">Form</NavLink>
+        </li>
+        <li>
+          <NavLink to="/about">About</NavLink>
         </li>
       </ol>
     </div>

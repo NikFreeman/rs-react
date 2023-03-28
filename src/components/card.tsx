@@ -24,11 +24,11 @@ export default class Card extends Component<CardProps> {
     return (
       <div
         role="listitem"
-        className="w-60 border rounded-lg m-5 p-3 bg-gradient-to-b from-cyan-100 to-blue-400 flex-auto"
+        className="m-5 w-60 flex-auto rounded-lg border bg-gradient-to-b from-cyan-100 to-blue-400 p-3"
       >
-        <div className="font-fatface text-center font-bold text-orange-600 ">{title}</div>
-        <img className="rounded-lg" src={thumbnail} />
-        <div className="bg-slate-300 my-3 px-2 rounded-lg">
+        <div className="text-center font-fatface font-bold text-orange-600 ">{title}</div>
+        <img className="mx-auto max-h-48 rounded-lg object-contain" src={thumbnail} />
+        <div className="my-3 rounded-lg bg-slate-300 px-2">
           <div className=" text-base ">
             <span className="font-fatface text-sm text-orange-700">Category:</span> {category}
           </div>
