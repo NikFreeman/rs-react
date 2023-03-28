@@ -7,8 +7,17 @@ export interface InformForm {
   personalData: boolean;
   avatar: string;
 }
-export interface FormLayoutState {
-  data: InformForm[];
+export interface CheckForm {
+  firstName: string;
+  lastName: string;
+  birthday: string;
+  male: boolean;
+  female: boolean;
+  personalData: boolean;
+  avatar: string;
+}
+
+export interface ValidForm {
   isErrorFirstName: boolean;
   isErrorLastName: boolean;
   isErrorBirthday: boolean;
@@ -16,4 +25,8 @@ export interface FormLayoutState {
   isErrorPersonalData: boolean;
   isErrorAvatar: boolean;
   formValid: boolean;
+}
+export interface FormLayoutState {
+  data: InformForm[];
+  valid: ValidForm;
 }

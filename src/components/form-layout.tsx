@@ -1,5 +1,6 @@
 import { Component, createRef } from 'react';
 import { FormLayoutState, InformForm } from '../models/inform-form';
+import { checkValidFields } from '../utils/validation';
 import DetailForm from './card-form';
 
 class FormLayout extends Component<unknown, FormLayoutState> {
@@ -16,22 +17,25 @@ class FormLayout extends Component<unknown, FormLayoutState> {
     super(props);
     this.state = {
       data: [],
-      isErrorFirstName: false,
-      isErrorLastName: false,
-      isErrorBirthday: false,
-      isErrorSex: false,
-      isErrorPersonalData: false,
-      isErrorAvatar: false,
-      formValid: false,
+      valid: {
+        isErrorFirstName: false,
+        isErrorLastName: false,
+        isErrorBirthday: false,
+        isErrorSex: false,
+        isErrorPersonalData: false,
+        isErrorAvatar: false,
+        formValid: false,
+      },
     };
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    this.validateField();
     this.validateForm();
-    if (this.state.formValid) {
+
+    if (this.validateForm()) {
       alert('Form submitted');
       const firstName = this.firstNameRef.current;
       const lastName = this.lastNameRef.current;
@@ -80,52 +84,31 @@ class FormLayout extends Component<unknown, FormLayoutState> {
     if (this.personalDataRef.current) {
       this.personalDataRef.current.checked = false;
     }
-    this.setState({ formValid: false });
-  }
-
-  validateField() {
-    const firstName = this.firstNameRef.current;
-    const regExpFirstName = new RegExp('(^[A-ZА-ЯЁ][a-zа-яё]{3,})');
-    if (firstName) {
-      this.setState({ isErrorFirstName: !regExpFirstName.test(firstName.value) });
-    }
-
-    const lastName = this.lastNameRef.current;
-    const regExpLastName = new RegExp('(^[A-ZА-ЯЁ][a-zа-яё]{3,})');
-    if (lastName) {
-      this.setState({ isErrorLastName: !regExpLastName.test(lastName.value) });
-    }
-
-    const birthday = this.birthdayRef.current;
-    if (birthday) {
-      this.setState({ isErrorBirthday: birthday.value === '' });
-    }
-
-    const sexMale = this.sexMaleRef.current;
-    const sexFemale = this.sexFemaleRef.current;
-    if (sexMale && sexFemale) {
-      this.setState({ isErrorSex: sexMale.checked && sexFemale.checked });
-    }
-
-    const personalData = this.personalDataRef.current;
-    if (personalData) {
-      this.setState({ isErrorPersonalData: !personalData.checked });
-    }
-    const avatarFile = this.avatarRef.current;
-    if (avatarFile) {
-      this.setState({ isErrorAvatar: avatarFile.value === '' });
-    }
+    const startValid = {
+      isErrorFirstName: false,
+      isErrorLastName: false,
+      isErrorBirthday: false,
+      isErrorSex: false,
+      isErrorPersonalData: false,
+      isErrorAvatar: false,
+      formValid: false,
+    };
+    this.setState({ valid: startValid });
   }
 
   validateForm() {
-    const isValidateForm =
-      !this.state.isErrorFirstName &&
-      !this.state.isErrorLastName &&
-      !this.state.isErrorBirthday &&
-      !this.state.isErrorPersonalData &&
-      !this.state.isErrorSex &&
-      !this.state.isErrorAvatar;
-    this.setState({ formValid: isValidateForm });
+    const fields = {
+      firstName: this.firstNameRef.current!.value,
+      lastName: this.lastNameRef.current!.value,
+      birthday: this.birthdayRef.current!.value,
+      male: this.sexMaleRef.current!.checked,
+      female: this.sexFemaleRef.current!.checked,
+      personalData: this.personalDataRef.current!.checked,
+      avatar: this.avatarRef.current!.value,
+    };
+    const resultCheck = checkValidFields(fields);
+    this.setState({ valid: resultCheck });
+    return resultCheck.formValid;
   }
 
   render() {
@@ -157,7 +140,7 @@ class FormLayout extends Component<unknown, FormLayoutState> {
                   id="first-name"
                   ref={this.firstNameRef}
                 />
-                {this.state.isErrorFirstName && <span className="text-red-500">Error</span>}
+                {this.state.valid.isErrorFirstName && <span className="text-red-500">Error</span>}
               </label>
               <label htmlFor="last-name">
                 Last name:
@@ -181,7 +164,7 @@ class FormLayout extends Component<unknown, FormLayoutState> {
                   required
                   ref={this.lastNameRef}
                 />
-                {this.state.isErrorLastName && <span className="text-red-500">Error</span>}
+                {this.state.valid.isErrorLastName && <span className="text-red-500">Error</span>}
               </label>
             </fieldset>
             <hr />
@@ -206,7 +189,7 @@ class FormLayout extends Component<unknown, FormLayoutState> {
                 type="date"
                 ref={this.birthdayRef}
               />
-              {this.state.isErrorBirthday && <span className="text-red-500">Error</span>}
+              {this.state.valid.isErrorBirthday && <span className="text-red-500">Error</span>}
             </label>
             <hr />
             <label className="text-sm" htmlFor="country">
@@ -247,7 +230,7 @@ class FormLayout extends Component<unknown, FormLayoutState> {
                 id="checkPerson"
                 ref={this.personalDataRef}
               />
-              {this.state.isErrorPersonalData && <span className="text-red-500">Error</span>}
+              {this.state.valid.isErrorPersonalData && <span className="text-red-500">Error</span>}
             </label>
             <fieldset className="flex w-1/2 flex-col border">
               <legend>Sex:</legend>
@@ -273,12 +256,12 @@ class FormLayout extends Component<unknown, FormLayoutState> {
                   ref={this.sexFemaleRef}
                 />
               </label>
-              {this.state.isErrorSex && <span className="text-red-500">Error</span>}
+              {this.state.valid.isErrorSex && <span className="text-red-500">Error</span>}
             </fieldset>
             <input type="file" name="avatar" ref={this.avatarRef} accept="image/png, image/jpeg" />
-            {this.state.isErrorAvatar && <span className="text-red-500">Error</span>}
+            {this.state.valid.isErrorAvatar && <span className="text-red-500">Error</span>}
             <button
-              className="mx-auto w-20 rounded-lg border px-2 hover:bg-slate-700 hover:text-slate-100 "
+              className="mx-auto w-20 rounded-lg border px-2 hover:bg-slate-700 hover:text-slate-100 active:text-lime-500"
               type="submit"
             >
               Submit
