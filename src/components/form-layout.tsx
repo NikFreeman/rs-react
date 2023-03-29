@@ -2,6 +2,7 @@ import { Component, createRef } from 'react';
 import { FormLayoutState, InformForm } from '../models/inform-form';
 import { checkValidFields } from '../utils/validation';
 import DetailForm from './card-form';
+import Toast from './toast';
 
 class FormLayout extends Component<unknown, FormLayoutState> {
   private firstNameRef = createRef<HTMLInputElement>();
@@ -26,6 +27,7 @@ class FormLayout extends Component<unknown, FormLayoutState> {
         isErrorAvatar: false,
         formValid: false,
       },
+      isShowToast: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,7 +38,6 @@ class FormLayout extends Component<unknown, FormLayoutState> {
     this.validateForm();
 
     if (this.validateForm()) {
-      alert('Form submitted');
       const firstName = this.firstNameRef.current;
       const lastName = this.lastNameRef.current;
       const birthday = this.birthdayRef.current;
@@ -56,6 +57,9 @@ class FormLayout extends Component<unknown, FormLayoutState> {
         };
         this.setState({
           data: [...this.state.data, formData],
+        });
+        this.setState({
+          isShowToast: true,
         });
         this.resetForm();
       }
@@ -267,6 +271,8 @@ class FormLayout extends Component<unknown, FormLayoutState> {
               Submit
             </button>
           </form>
+
+          {<Toast message="The data has been saved" />}
         </div>
         {this.state.data.map((item, index) => {
           return <DetailForm key={index} detail={item} />;

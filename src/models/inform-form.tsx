@@ -29,4 +29,5 @@ export interface ValidForm {
 export interface FormLayoutState {
   data: InformForm[];
   valid: ValidForm;
+  isShowToast: boolean;
 }
