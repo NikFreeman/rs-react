@@ -1,27 +1,28 @@
-import { Component, ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ToastProps {
   message: string;
 }
-interface ToastState {
-  isVisible: boolean;
-}
 
-class Toast extends Component<ToastProps, ToastState> {
-  constructor(props: ToastProps) {
-    super(props);
-    this.state = { isVisible: true };
-  }
-  componentDidMount() {
-    setTimeout(() => this.setState({ isVisible: false }), 3000);
-  }
-  render(): ReactNode {
-    console.log('toasty');
-    return (
-      <div className="fixed bottom-32 right-10 translate-y-full opacity-0 transition-opacity">
-        <div className="m-7 bg-slate-700 px-5 py-6 text-slate-200">{this.props.message}</div>
-      </div>
-    );
-  }
-}
+const Toast = (props: ToastProps) => {
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible(false);
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+  return (
+    <div
+      className={`fixed bottom-32 right-10 translate-y-full 
+      ${visible ? 'opacity-100' : 'opacity-0'}
+      transition-opacity`}
+    >
+      <div className="m-7 bg-slate-700 px-5 py-6 text-slate-200">{props.message}</div>
+    </div>
+  );
+};
 export default Toast;
