@@ -3,9 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 function SearchBar() {
   const [value, setValue] = useState('');
   const valueRef = useRef(value);
+
   useEffect(() => {
     valueRef.current = value;
   }, [value]);
+
   useEffect(() => {
     const valueLocal = localStorage.getItem('value');
     if (valueLocal) {
@@ -15,7 +17,9 @@ function SearchBar() {
       localStorage.setItem('value', valueRef.current);
     };
   }, []);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value);
+
   return (
     <div className="mx-auto flex max-w-5xl justify-center">
       <form className="my-5 ">

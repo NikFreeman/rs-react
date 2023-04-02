@@ -165,7 +165,7 @@ function FormLayout() {
               className="mx-3"
               type="checkbox"
               id="checkPerson"
-              {...register('personalData', { required: true })}
+              {...register('personalData', { required: 'required field' })}
             />
             {errors?.personalData && (
               <span className="text-red-500">{errors?.personalData.message}</span>
