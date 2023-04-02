@@ -17,9 +17,9 @@ const Toast = (props: ToastProps) => {
   }, []);
   return (
     <div
-      className={`fixed bottom-32 right-10 translate-y-full 
-      ${visible ? 'opacity-100' : 'opacity-0'}
-      transition-opacity`}
+      className={`fixed -top-20 right-10 translate-y-full 
+      ${visible ? 'opacity-100' : 'opacity-0'}      
+      transition-transform`}
     >
       <div className="m-7 bg-slate-700 px-5 py-6 text-slate-200">{props.message}</div>
     </div>

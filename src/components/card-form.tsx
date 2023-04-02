@@ -1,11 +1,11 @@
-import { InformForm } from '../models/inform-form';
+import { FormInput } from '../models/inform-form';
 
 interface DetailProps {
-  detail: InformForm;
+  detail: FormInput;
 }
 
 const DetailForm = (props: DetailProps) => {
-  const { firstName, lastName, birthday, birthplace, sex, personalData, avatar } = props.detail;
+  const { firstName, lastName, birthday, birthplace, sex, personalData, picture } = props.detail;
   return (
     <div>
       <div className="px-4 py-2">
@@ -15,7 +15,7 @@ const DetailForm = (props: DetailProps) => {
         <p>Birthplace: {birthplace}</p>
         <p>Sex: {sex}</p>
         <p>Consent to the processing of personal data: {personalData ? 'Yes' : 'No'}</p>
-        <p>Avatar: {avatar}</p>
+        <p>Picture: {picture}</p>
       </div>
       <hr />
     </div>

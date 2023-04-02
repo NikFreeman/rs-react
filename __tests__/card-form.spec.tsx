@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-
+import { BirthplaceEnum } from '../src/models/inform-form';
 import DetailForm from '../src/components/card-form';
 
 describe('render DetailForm component', () => {
@@ -8,10 +8,10 @@ describe('render DetailForm component', () => {
     firstName: 'John',
     lastName: 'Smith',
     birthday: '2023-03-27',
-    birthplace: 'Belarus',
+    birthplace: BirthplaceEnum.belarus,
     sex: 'male',
     personalData: true,
-    avatar: '111.jpg',
+    picture: '111.jpg',
   };
   it('test render test', () => {
     const { getByText } = render(<DetailForm detail={testData} />);
