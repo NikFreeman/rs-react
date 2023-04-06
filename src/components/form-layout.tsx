@@ -64,7 +64,7 @@ function FormLayout() {
                 {...register('firstName', {
                   required: 'required field',
                   pattern: {
-                    value: /(^[A-ZА-ЯЁ][a-zа-яё]{3,})/,
+                    value: /(^[A-ZА-ЯЁ][a-zа-яё]{2,})/,
                     message: 'First capital letter and at least three',
                   },
                 })}
@@ -96,7 +96,7 @@ function FormLayout() {
                 {...register('lastName', {
                   required: 'required field',
                   pattern: {
-                    value: /(^[A-ZА-ЯЁ][a-zа-яё]{3,})/,
+                    value: /(^[A-ZА-ЯЁ][a-zа-яё]{2,})/,
                     message: 'First capital letter and at least three',
                   },
                 })}
