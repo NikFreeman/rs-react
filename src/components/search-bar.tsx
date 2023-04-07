@@ -1,53 +1,44 @@
-import { Component } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-interface ValueState {
-  value: string;
-}
-class SearchBar extends Component<unknown, ValueState> {
-  constructor(props: unknown) {
-    super(props);
-    const item = localStorage.getItem('value');
-    item ? (this.state = { value: item }) : (this.state = { value: '' });
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+function SearchBar() {
+  const [value, setValue] = useState('');
+  const valueRef = useRef(value);
 
-  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ value: event.target.value });
-  }
-  handleSubmit(event: React.SyntheticEvent) {
-    alert('Search ' + this.state.value);
-    event.preventDefault();
-  }
-  componentDidMount() {
-    const item = localStorage.getItem('value');
-    if (item) this.setState({ value: item });
-  }
+  useEffect(() => {
+    valueRef.current = value;
+  }, [value]);
 
-  componentWillUnmount() {
-    localStorage.setItem('value', this.state.value);
-  }
+  useEffect(() => {
+    const valueLocal = localStorage.getItem('value');
+    if (valueLocal) {
+      setValue(valueLocal);
+    }
+    return () => {
+      localStorage.setItem('value', valueRef.current);
+    };
+  }, []);
 
-  render() {
-    return (
-      <div className="mx-auto flex max-w-5xl justify-center">
-        <form className="my-5 " onSubmit={this.handleSubmit}>
-          <label>
-            <input
-              className="mx-5 w-72 border-2 px-2 outline-none"
-              type="text"
-              value={this.state.value}
-              onChange={this.handleChange}
-            />
-          </label>
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value);
+
+  return (
+    <div className="mx-auto flex max-w-5xl justify-center">
+      <form className="my-5 ">
+        <label>
           <input
-            type="submit"
-            value="Search"
-            className="w-36 rounded  border-2 font-normal text-orange-700 hover:bg-blue-400 hover:text-slate-100"
+            className="mx-5 w-72 border-2 px-2 outline-none"
+            type="text"
+            value={value}
+            onChange={handleChange}
           />
-        </form>
-      </div>
-    );
-  }
+        </label>
+        <input
+          type="submit"
+          value="Search"
+          className="w-36 rounded  border-2 font-normal text-orange-700 hover:bg-blue-400 hover:text-slate-100"
+        />
+      </form>
+    </div>
+  );
 }
+
 export default SearchBar;

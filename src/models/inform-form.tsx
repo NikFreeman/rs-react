@@ -1,32 +1,26 @@
-export interface InformForm {
+export enum BirthplaceEnum {
+  belarus = 'Belarus',
+  ukraine = 'Ukraine',
+  poland = 'Poland',
+  other = 'other',
+}
+
+export interface FormInput {
   firstName: string;
   lastName: string;
   birthday: string;
-  birthplace: string;
+  birthplace: BirthplaceEnum;
   sex: string;
   personalData: boolean;
-  avatar: string;
+  picture: string;
 }
+
 export interface CheckForm {
   firstName: string;
   lastName: string;
   birthday: string;
-  male: boolean;
-  female: boolean;
+  birthplace: BirthplaceEnum;
+  sex: string;
   personalData: boolean;
-  avatar: string;
-}
-
-export interface ValidForm {
-  isErrorFirstName: boolean;
-  isErrorLastName: boolean;
-  isErrorBirthday: boolean;
-  isErrorSex: boolean;
-  isErrorPersonalData: boolean;
-  isErrorAvatar: boolean;
-  formValid: boolean;
-}
-export interface FormLayoutState {
-  data: InformForm[];
-  valid: ValidForm;
+  picture: FileList;
 }
