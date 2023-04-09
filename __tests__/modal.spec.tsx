@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import Card from '../src/components/card';
+import Modal from '../src/components/modal';
 
 describe('render Card component', () => {
   const testData = {
@@ -82,8 +82,9 @@ describe('render Card component', () => {
       },
     },
   };
+  const handleClose = jest.fn();
   it('test title', () => {
-    const { getByText } = render(<Card photo={testData} />);
+    const { getByText } = render(<Modal photo={testData} onClose={handleClose} />);
     const linkElement = getByText(/#minsk/i);
     expect(linkElement).toBeInTheDocument();
   });

@@ -7,15 +7,15 @@ export interface Photo {
   height: number;
   color: string;
   blur_hash: string;
-  description: null;
+  description: string;
   alt_description: string;
   urls: Urls;
   links: Links;
-  likes: 38;
-  liked_by_user: false;
-  current_user_collections: never;
+  likes: number;
+  liked_by_user: boolean;
+  current_user_collections: object;
   sponsorship: null;
-  topic_submissions: never;
+  topic_submissions: object;
   user: IUser;
 }
 export interface Urls {

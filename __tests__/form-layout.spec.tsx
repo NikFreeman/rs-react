@@ -6,4 +6,6 @@ it('should render form', () => {
   const { getByText } = render(<FormLayout />);
   expect(getByText(/First name:/)).toBeInTheDocument();
   expect(getByText(/Last name:/)).toBeInTheDocument();
+  expect(getByText(/I consent to my personal data/)).toBeInTheDocument();
+  expect(getByText(/Country:/)).toBeInTheDocument();
 });
