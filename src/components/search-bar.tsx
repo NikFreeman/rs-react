@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
-function SearchBar() {
+interface SearchProps {
+  onSubmit: (value: string) => void;
+}
+
+function Search(props: SearchProps) {
   const [value, setValue] = useState('');
   const valueRef = useRef(value);
 
@@ -19,10 +23,13 @@ function SearchBar() {
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value);
-
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    props.onSubmit(value);
+  };
   return (
     <div className="mx-auto flex max-w-5xl justify-center">
-      <form className="my-5 ">
+      <form className="my-5 " onSubmit={handleSubmit}>
         <label>
           <input
             className="mx-5 w-72 border-2 px-2 outline-none"
@@ -41,4 +48,4 @@ function SearchBar() {
   );
 }
 
-export default SearchBar;
+export default Search;
