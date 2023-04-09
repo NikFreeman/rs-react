@@ -6,7 +6,6 @@ interface PhotoProps {
 }
 
 export default function CardList(props: PhotoProps) {
-  console.log(props.items);
   if (props.items.length !== 0) {
     return (
       <div role="list" className="mx-auto flex max-w-5xl flex-row flex-wrap">

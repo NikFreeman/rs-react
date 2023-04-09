@@ -35,6 +35,7 @@ function Search(props: SearchProps) {
             className="mx-5 w-72 border-2 px-2 outline-none"
             type="text"
             value={value}
+            placeholder="Search photo"
             onChange={handleChange}
           />
         </label>
