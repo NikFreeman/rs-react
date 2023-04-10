@@ -11,7 +11,6 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log('query->', query);
     setLoading(true);
     const data = loader<SearchPhotos>(query);
     data.then((items) => {
