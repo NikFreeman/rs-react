@@ -7,17 +7,18 @@ import Loading from '../components/loading';
 
 export default function Home() {
   const [items, setItems] = useState<Photo[]>([]);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(localStorage.getItem('value ') || '');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log('query->', query);
     setLoading(true);
     const data = loader<SearchPhotos>(query);
     data.then((items) => {
       setItems(items.results);
       setLoading(false);
     });
-  }, [query]);
+  }, [query, setQuery]);
 
   return (
     <div>

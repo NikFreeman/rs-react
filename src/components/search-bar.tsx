@@ -5,22 +5,24 @@ interface SearchProps {
 }
 
 function Search(props: SearchProps) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(localStorage.getItem('value') || '');
   const valueRef = useRef(value);
 
   useEffect(() => {
     valueRef.current = value;
+    setValue(value);
   }, [value]);
 
   useEffect(() => {
     const valueLocal = localStorage.getItem('value');
     if (valueLocal) {
       setValue(valueLocal);
+      props.onSubmit(valueLocal);
     }
     return () => {
       localStorage.setItem('value', valueRef.current);
     };
-  }, []);
+  }, [props]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
