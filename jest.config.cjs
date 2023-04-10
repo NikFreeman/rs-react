@@ -19,6 +19,7 @@ module.exports = {
   coverageProvider: 'v8',
 
   coveragePathIgnorePatterns: [
+    '/node_modules/',
     '<rootDir>/src/models/',
     '<rootDir>/src/main.tsx',
     '<rootDir>/src/vite-env.d.ts',
