@@ -1,16 +1,24 @@
+import { Photo } from '../models/unsplash';
 import Card from './card';
-import data from '../data/products';
-import { Product } from '../models/products';
-import { useState } from 'react';
 
-export default function CardList() {
-  const [state] = useState(data);
+interface PhotoProps {
+  items: Photo[];
+}
 
-  return (
-    <div role="list" className="mx-auto flex max-w-5xl flex-row flex-wrap">
-      {state.map((item: Product) => {
-        return <Card product={item} key={item.id} />;
-      })}
-    </div>
-  );
+export default function CardList(props: PhotoProps) {
+  if (props.items.length !== 0) {
+    return (
+      <div role="list" className="mx-auto flex max-w-5xl flex-row flex-wrap">
+        {props.items.map((item: Photo) => {
+          return <Card photo={item} key={item.id} />;
+        })}
+      </div>
+    );
+  } else {
+    return (
+      <div className="">
+        <h1 className="text-center text-2xl font-bold text-green-600 ">No results found</h1>
+      </div>
+    );
+  }
 }

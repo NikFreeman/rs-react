@@ -18,6 +18,13 @@ module.exports = {
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'v8',
 
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '<rootDir>/src/models/',
+    '<rootDir>/src/main.tsx',
+    '<rootDir>/src/vite-env.d.ts',
+  ],
+
   // A preset that is used as a base for Jest's configuration
   // preset: undefined,
   preset: 'ts-jest',

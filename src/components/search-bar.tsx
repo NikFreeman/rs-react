@@ -1,33 +1,43 @@
 import { useEffect, useRef, useState } from 'react';
 
-function SearchBar() {
-  const [value, setValue] = useState('');
+interface SearchProps {
+  onSubmit: (value: string) => void;
+}
+
+function Search(props: SearchProps) {
+  const [value, setValue] = useState(localStorage.getItem('value') || '');
   const valueRef = useRef(value);
 
   useEffect(() => {
     valueRef.current = value;
+    setValue(value);
   }, [value]);
 
   useEffect(() => {
     const valueLocal = localStorage.getItem('value');
     if (valueLocal) {
       setValue(valueLocal);
+      props.onSubmit(valueLocal);
     }
     return () => {
       localStorage.setItem('value', valueRef.current);
     };
-  }, []);
+  }, [props]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value);
-
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    props.onSubmit(value);
+  };
   return (
     <div className="mx-auto flex max-w-5xl justify-center">
-      <form className="my-5 ">
+      <form className="my-5 " onSubmit={handleSubmit}>
         <label>
           <input
             className="mx-5 w-72 border-2 px-2 outline-none"
             type="text"
             value={value}
+            placeholder="Search photo"
             onChange={handleChange}
           />
         </label>
@@ -41,4 +51,4 @@ function SearchBar() {
   );
 }
 
-export default SearchBar;
+export default Search;

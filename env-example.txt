@@ -1,0 +1,2 @@
+//unsplash client_id 
+VITE_CLIENT_ID='SouHY7Uul-OxoMl3LL3c0NkxUtjIrKwf3tsGk1JaiVo'
