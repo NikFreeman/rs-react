@@ -1,28 +1,19 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import CardList from '../components/card-list';
 import Search from '../components/search-bar';
-import loader from '../data/loader';
-import { Photo, SearchPhotos } from '../models/unsplash';
+
+import { Photo } from '../models/unsplash';
 import Loading from '../components/loading';
+import { useSearchPhotosQuery } from '../store/unsplash/unsplash.api';
 
 export default function Home() {
-  const [items, setItems] = useState<Photo[]>([]);
-  const [query, setQuery] = useState(localStorage.getItem('value ') || '');
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    const data = loader<SearchPhotos>(query);
-    data.then((items) => {
-      setItems(items.results);
-      setLoading(false);
-    });
-  }, [query, setQuery]);
+  const { isLoading, isError, data } = useSearchPhotosQuery('test');
 
   return (
     <div>
-      <Search onSubmit={setQuery} />
-      {!loading ? <CardList items={items} /> : <Loading />}
+      <Search onSubmit={() => console.log('submit')} />
+      {isError && <h3>error</h3>}
+      {!isLoading ? <CardList items={data as Photo[]} /> : <Loading />}
     </div>
   );
 }
