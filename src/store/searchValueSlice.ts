@@ -4,10 +4,10 @@ export const searchValueSlice = createSlice({
   name: 'searchValue',
   initialState: 'random',
   reducers: {
-    saveValue: (_state, action) => action.payload,
+    setValue: (_state, action) => action.payload,
   },
 });
 
-export const { saveValue } = searchValueSlice.actions;
+export const { setValue } = searchValueSlice.actions;
 
 export default searchValueSlice.reducer;

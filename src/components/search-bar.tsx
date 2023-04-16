@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react';
 
 import { useSelector } from './../store/index';
 import { useDispatch } from 'react-redux';
-import { saveValue } from '../store/search-value';
+import { setValue } from '../store/searchValueSlice';
 
 function Search() {
   const value = useSelector((state) => state.searchValue);
@@ -12,7 +12,7 @@ function Search() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(saveValue(inputValue));
+    dispatch(setValue(inputValue));
   };
   return (
     <div className="mx-auto flex max-w-5xl justify-center">

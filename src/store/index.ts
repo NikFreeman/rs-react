@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { unsplashApi } from './unsplash/unsplash.api';
-import { searchValueSlice } from './search-value';
-import { dataFormSlice } from './form-data';
+import { searchValueSlice } from './searchValueSlice';
+import { dataFormSlice } from './formDataSlice';
 import { useSelector as rawUseSelector, TypedUseSelectorHook } from 'react-redux';
 
 export const store = configureStore({

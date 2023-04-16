@@ -3,7 +3,7 @@ import DetailForm from './card-form';
 import Toast from './toast';
 import { BirthplaceEnum, CheckForm, FormInput } from '../models/inform-form';
 import { useDispatch } from 'react-redux';
-import { addDataForm } from '../store/form-data';
+import { addDataForm } from '../store/formDataSlice';
 import { useSelector } from '../store';
 
 function FormLayout() {
