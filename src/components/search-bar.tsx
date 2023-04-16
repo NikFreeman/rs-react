@@ -1,33 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
+import { FormEvent, useState } from 'react';
 
-interface SearchProps {
-  onSubmit: (value: string) => void;
-}
+import { useSelector } from './../store/index';
+import { useDispatch } from 'react-redux';
+import { saveValue } from '../store/search-value';
 
-function Search(props: SearchProps) {
-  const [value, setValue] = useState(localStorage.getItem('value') || '');
-  const valueRef = useRef(value);
+function Search() {
+  const value = useSelector((state) => state.searchValue);
+  const [inputValue, setInputValue] = useState(value);
 
-  useEffect(() => {
-    valueRef.current = value;
-    setValue(value);
-  }, [value]);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const valueLocal = localStorage.getItem('value');
-    if (valueLocal) {
-      setValue(valueLocal);
-      props.onSubmit(valueLocal);
-    }
-    return () => {
-      localStorage.setItem('value', valueRef.current);
-    };
-  }, [props]);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.onSubmit(value);
+    console.log(inputValue);
+    dispatch(saveValue(inputValue));
   };
   return (
     <div className="mx-auto flex max-w-5xl justify-center">
@@ -36,9 +22,9 @@ function Search(props: SearchProps) {
           <input
             className="mx-5 w-72 border-2 px-2 outline-none"
             type="text"
-            value={value}
+            value={inputValue}
             placeholder="Search photo"
-            onChange={handleChange}
+            onChange={(e) => setInputValue(e.target.value)}
           />
         </label>
         <input
