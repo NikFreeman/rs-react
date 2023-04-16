@@ -12,7 +12,6 @@ function Search() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(inputValue);
     dispatch(saveValue(inputValue));
   };
   return (
