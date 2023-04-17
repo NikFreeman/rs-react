@@ -4,10 +4,11 @@ import { Photo, SearchPhotos } from '../../models/unsplash';
 const CLIENT_ID = 'SouHY7Uul-OxoMl3LL3c0NkxUtjIrKwf3tsGk1JaiVo';
 const PER_PAGE = 12;
 const ORIENTATION = 'landscape';
+const BASE_URL = 'https://api.unsplash.com';
 export const unsplashApi = createApi({
   reducerPath: 'unsplash/api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.unsplash.com',
+    baseUrl: BASE_URL,
   }),
   endpoints: (build) => ({
     searchPhotos: build.query<Photo[], string>({

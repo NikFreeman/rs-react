@@ -1,18 +1,24 @@
-import 'whatwg-fetch';
 import React from 'react';
-import { render } from '@testing-library/react';
-
 import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
+import { rest } from 'msw';
+import { render } from '@testing-library/react';
+import { server } from '../src/mocks/server';
 
-import AppRoute from './../src/routes/routes';
+import AppRoute from '../src/routes/routes';
+import { store } from '../src/store';
 
-describe('test NavBar component', () => {
-  const initialState = { dataForm: { data: [] } };
-  const mockStore = configureStore();
-  let store;
+const apiData = [
+  { name: 'Mark Zuckerberg', age: '34' },
+  { name: 'Elon Musk', age: '44' },
+];
+server.use(
+  rest.get(`*`, (req, res, ctx) => {
+    return res(ctx.json(apiData));
+  })
+);
+
+describe('test route component', () => {
   it('render Home', () => {
-    store = mockStore(initialState);
     const { getByText } = render(
       <Provider store={store}>
         <AppRoute />
