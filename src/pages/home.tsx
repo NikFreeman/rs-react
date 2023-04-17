@@ -1,8 +1,6 @@
-// import { useEffect, useState } from 'react';
 import CardList from '../components/card-list';
 import Search from '../components/search-bar';
 
-import { Photo } from '../models/unsplash';
 import Loading from '../components/loading';
 import { useSearchPhotosQuery } from '../store/unsplash/unsplash.api';
 import { useSelector } from '../store';
@@ -16,7 +14,7 @@ export default function Home() {
     <div>
       <Search />
       {isError && <h3>error</h3>}
-      {!isLoading ? <CardList items={data as Photo[]} /> : <Loading />}
+      {!isLoading ? data && <CardList items={data} /> : <Loading />}
     </div>
   );
 }
