@@ -1,12 +1,12 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useState } from 'react';
-
 import DetailForm from './card-form';
 import Toast from './toast';
 import { BirthplaceEnum, CheckForm, FormInput } from '../models/inform-form';
+import { useDispatch } from 'react-redux';
+import { addDataForm } from '../store/formDataSlice';
+import { useSelector } from '../store';
 
 function FormLayout() {
-  const [dataForm, setDataForm] = useState<FormInput[]>([]);
   const {
     register,
     reset,
@@ -23,10 +23,11 @@ function FormLayout() {
       picture: undefined,
     },
   });
-
+  const dispatch = useDispatch();
+  const items = useSelector((store) => store.dataForm.data);
   const onSubmit: SubmitHandler<CheckForm> = (data) => {
     const tempData: FormInput = { ...data, picture: String(data.picture[0].name) };
-    setDataForm((prevData) => [...prevData, tempData]);
+    dispatch(addDataForm(tempData));
     reset();
   };
 
@@ -211,7 +212,7 @@ function FormLayout() {
 
         {isSubmitSuccessful && <Toast message="The data has been saved" />}
       </div>
-      {dataForm.map((item, index) => {
+      {items.map((item, index) => {
         return <DetailForm key={index} detail={item} />;
       })}
     </div>
