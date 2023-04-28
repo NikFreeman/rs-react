@@ -12,7 +12,7 @@ const apiData = [
   { name: 'Elon Musk', age: '44' },
 ];
 server.use(
-  rest.get(`*`, (req, res, ctx) => {
+  rest.get(`https://api.unsplash.com/search/photos`, (req, res, ctx) => {
     return res(ctx.json(apiData));
   })
 );
