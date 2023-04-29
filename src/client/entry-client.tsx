@@ -13,7 +13,7 @@ const FullApp = () => (
     </BrowserRouter>
   </React.StrictMode>
 );
-
+console.log('hot', import.meta.hot);
 if (import.meta.hot || !container?.innerText) {
   const root = createRoot(container!);
   root.render(<FullApp />);
