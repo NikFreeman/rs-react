@@ -41,7 +41,7 @@ async function createServer(isProd = process.env.NODE_ENV === 'production') {
   const stylesheets = getStyleSheets();
   app.use('*', async (req: Request, res: Response, next: NextFunction) => {
     const url = req.originalUrl;
-
+    console.log(url);
     try {
       let template = await fs.readFile(
         isProd ? resolve('dist/client/index.html') : resolve('index.html'),
