@@ -1,9 +1,11 @@
+///<reference types="cypress" />
+
 describe('Home page', () => {
   beforeEach(() => {
     cy.visit('/');
   });
   it('search bar', () => {
     cy.get('input').should('have.value', 'random');
-    cy.get('input').should('exist');
+    cy.get('input[type=submit]').should('have.value', 'Search');
   });
 });
