@@ -4,8 +4,9 @@ import { rest } from 'msw';
 import { render } from '@testing-library/react';
 import { server } from '../src/mocks/server';
 
-import AppRoute from '../src/routes/routes';
+import AppRoutes from '../src/routes/routes';
 import { store } from '../src/store';
+import { BrowserRouter } from 'react-router-dom';
 
 const apiData = [
   { name: 'Mark Zuckerberg', age: '34' },
@@ -21,7 +22,9 @@ describe('test route component', () => {
   it('render Home', () => {
     const { getByText } = render(
       <Provider store={store}>
-        <AppRoute />
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
       </Provider>
     );
     const linkElement = getByText(/About/i);

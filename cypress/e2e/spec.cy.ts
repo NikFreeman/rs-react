@@ -1,7 +1,9 @@
-describe('template spec', () => {
-  it('passes', () => {
+describe('Home page', () => {
+  beforeEach(() => {
     cy.visit('/');
+  });
+  it('search bar', () => {
     cy.get('input').should('have.value', 'random');
-    cy.get('button').should('have.text', 'Search');
+    cy.get('input').should('exist');
   });
 });

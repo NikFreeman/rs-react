@@ -9,7 +9,7 @@
     "build:server": "vite build --ssr src/client/entry-server.tsx --outDir dist/server",
     "build": "npm run build:client && npm run build:server",
     "dev": "vite",
-    "test:cypress": "start-server-and-test serve http://localhost:7456 cypress",
+    "test:cypress": "start-server-and-test serve http://localhost:7456/@vite/client cypress",
     "cypress": "cypress open",
     "build-old": "tsc && vite build",
     "preview": "vite preview",

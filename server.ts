@@ -65,14 +65,16 @@ async function createServer() {
           console.error(e);
         },
       });
-    } catch (e: unknown) {
-      vite.ssrFixStacktrace(e as Error);
-      next(e);
+    } catch (e) {
+      if (e instanceof Error) {
+        vite.ssrFixStacktrace(e);
+        next(e);
+      }
     }
   });
 
   const port = process.env.PORT || 7456;
-  app.listen(Number(port), '0.0.0.0', () => {
+  app.listen(Number(port), () => {
     console.log(`App is listening on http://localhost:${port}`);
   });
 }
