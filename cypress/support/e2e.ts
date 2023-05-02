@@ -15,6 +15,10 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands';
+//import '@cypress/code-coverage/support';
 
+afterEach(() => {
+  cy.window().trigger('unload');
+});
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

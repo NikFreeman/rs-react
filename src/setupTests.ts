@@ -10,4 +10,4 @@ afterEach(() => {
   // This is the solution to clear RTK Query cache after each test
   //store.dispatch(apiSlice.util.resetApiState());
 });
-//afterAll(() => server.close());
+afterAll(() => server.close());

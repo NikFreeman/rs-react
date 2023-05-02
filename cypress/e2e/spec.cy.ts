@@ -36,24 +36,7 @@ describe('Home page', () => {
     cy.get('div[role=listitem]').should('length', '12');
   });
 });
-describe('routing and show header current page', () => {
-  it('visit home page', () => {
-    cy.visit('/');
-    cy.get('h1').should('have.text', 'Current page: Main Page');
-  });
-  it('visit about page', () => {
-    cy.visit('/about');
-    cy.get('h1').should('have.text', 'Current page: About Page');
-  });
-  it('visit form page', () => {
-    cy.visit('/form');
-    cy.get('h1').should('have.text', 'Current page: Form Page');
-  });
-  it('visit 404 page', () => {
-    cy.visit('/test');
-    cy.get('h1').should('have.text', '404');
-  });
-});
+
 describe('should show modal', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -96,5 +79,23 @@ describe('menu should work', () => {
     cy.get('a[href="/"]').click();
     cy.get('h1').should('have.text', 'Current page: Main Page');
     cy.get('div[role=list]').should('exist');
+  });
+});
+describe('routing and show header current page', () => {
+  it('visit home page', () => {
+    cy.visit('/');
+    cy.get('h1').should('have.text', 'Current page: Main Page');
+  });
+  it('visit about page', () => {
+    cy.visit('/about');
+    cy.get('h1').should('have.text', 'Current page: About Page');
+  });
+  it('visit form page', () => {
+    cy.visit('/form');
+    cy.get('h1').should('have.text', 'Current page: Form Page');
+  });
+  it('visit 404 page', () => {
+    cy.visit('/test');
+    cy.get('h1').should('have.text', '404');
   });
 });
