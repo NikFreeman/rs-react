@@ -5,6 +5,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
+    'plugin:cypress/recommended',
     'prettier',
   ],
   env: {
@@ -39,7 +40,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-    'no-console': 'warn',
+    'no-console': 'off',
   },
   settings: {
     react: {

@@ -16,8 +16,8 @@ export default function CardList(props: PhotoProps) {
     );
   } else {
     return (
-      <div className="">
-        <h1 className="text-center text-2xl font-bold text-green-600 ">No results found</h1>
+      <div className="no-result">
+        <h2 className="text-center text-2xl font-bold text-green-600 ">No results found</h2>
       </div>
     );
   }
