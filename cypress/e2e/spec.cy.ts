@@ -50,7 +50,9 @@ describe('should show modal', () => {
   });
   it('show modal', () => {
     cy.get('div[role=listitem]:first-child').click('center');
-    cy.get('div[class="relative mx-auto my-4 max-w-5xl  rounded-lg bg-slate-100"]').should('exist');
+    cy.get('div[class="relative mx-auto my-4 max-w-5xl  rounded-lg bg-slate-100"]').should(
+      'be.visible'
+    );
     cy.get('div.modal-close').click();
   });
 });
